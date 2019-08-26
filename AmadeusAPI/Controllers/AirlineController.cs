@@ -1,5 +1,6 @@
 ﻿using AmadeusAPI.Filters;
 using AmadeusAPI.Helpers;
+using AmadeusAPI.Services;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -22,8 +23,11 @@ namespace AmadeusAPI.Controllers
         {
             MethodBase currentMethod = MethodBase.GetCurrentMethod();
             AirlineLogManager.Entering(string.Format("source: {0} to destination: {1}", request.source , request.destination), currentClass, currentMethod);
-          
-            return Request.CreateResponse(HttpStatusCode.OK, request);
+
+            IAirlineService airlineService = new AirlineService();
+            var  result = airlineService.GetAllPaths(request);
+
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         [BasicAuthentication]
@@ -35,7 +39,10 @@ namespace AmadeusAPI.Controllers
             MethodBase currentMethod = MethodBase.GetCurrentMethod();
             AirlineLogManager.Entering(string.Format("source: {0} to destination: {1}", request.source, request.destination), currentClass, currentMethod);
 
-            return Request.CreateResponse(HttpStatusCode.OK, request);
+            IAirlineService airlineService = new AirlineService();
+            var result = airlineService.GetShortestPath(request);
+
+            return Request.CreateResponse(HttpStatusCode.OK, result);           
         }
 
     }

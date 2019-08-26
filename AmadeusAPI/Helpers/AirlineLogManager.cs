@@ -6,7 +6,7 @@ namespace AmadeusAPI.Helpers
     public class AirlineLogManager
     {
 
-        private static readonly log4net.ILog creditcardLog = log4net.LogManager.GetLogger(typeof(AirlineLogManager));
+        private static readonly log4net.ILog airlineLog = log4net.LogManager.GetLogger(typeof(AirlineLogManager));
 
         /******************** Exiting ********************/
         public static void Exiting(object obj, string msg, Type _type, MethodBase _method, bool showObject = false)
@@ -113,35 +113,35 @@ namespace AmadeusAPI.Helpers
         /******************** DEBUG ********************/
         public static void Debug(string msg, Type _type, MethodBase _method)
         {
-            creditcardLog.Debug(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg));
+            airlineLog.Debug(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg));
         }
         /* Print data object in detail */
         public static void Debug(object obj, Type _type, MethodBase _method, bool jsonObject = false)
         {
-            if (creditcardLog.IsDebugEnabled)
+            if (airlineLog.IsDebugEnabled)
             {
 
                 if (obj != null)
                 {
                     if (jsonObject)
                     {
-                        creditcardLog.Debug(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToJsonString(obj)));
+                        airlineLog.Debug(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToJsonString(obj)));
                     }
                     else
                     {
-                        creditcardLog.Debug(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToXmlString(obj)));
+                        airlineLog.Debug(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToXmlString(obj)));
                     }
                 }
                 else
                 {
-                    creditcardLog.Debug(string.Format("{0}:{1}:[]", _type.Name, _method.Name));
+                    airlineLog.Debug(string.Format("{0}:{1}:[]", _type.Name, _method.Name));
                 }
             }
         }
         /* DEBUG with exception */
         public static void Debug(string msg, Type _type, MethodBase _method, Exception ex)
         {
-            creditcardLog.Debug(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg), ex);
+            airlineLog.Debug(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg), ex);
         }
 
 
@@ -149,25 +149,25 @@ namespace AmadeusAPI.Helpers
         public static void Error(string msg, Type _type, MethodBase _method)
         {
 
-            creditcardLog.Error(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg));
+            airlineLog.Error(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg));
         }
         /* Print data object in detail */
         public static void Error(object obj, Type _type, MethodBase _method, Exception ex)
         {
-            if (creditcardLog.IsErrorEnabled)
+            if (airlineLog.IsErrorEnabled)
             {
 
                 if (obj != null)
-                    creditcardLog.Error(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToXmlString(obj)), ex);
+                    airlineLog.Error(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToXmlString(obj)), ex);
                 else
-                    creditcardLog.Error(string.Format("{0}:{1}:[]", _type.Name, _method.Name), ex);
+                    airlineLog.Error(string.Format("{0}:{1}:[]", _type.Name, _method.Name), ex);
             }
         }
         /* Error with exception */
         public static void Error(string msg, Type _type, MethodBase _method, Exception ex)
         {
 
-            creditcardLog.Error(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg), ex);
+            airlineLog.Error(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg), ex);
         }
 
 
@@ -175,34 +175,34 @@ namespace AmadeusAPI.Helpers
         public static void Info(string msg, Type _type, MethodBase _method)
         {
             string message = string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg);
-            creditcardLog.Info(message);
+            airlineLog.Info(message);
         }
         /* Print data object in detail */
         public static void Info(object obj, Type _type, MethodBase _method, bool jsonObject = false)
         {
-            if (creditcardLog.IsInfoEnabled)
+            if (airlineLog.IsInfoEnabled)
             {
                 if (obj != null)
                 {
                     if (jsonObject)
                     {
-                        creditcardLog.Info(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToJsonString(obj)));
+                        airlineLog.Info(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToJsonString(obj)));
                     }
                     else
                     {
-                        creditcardLog.Info(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToXmlString(obj)));
+                        airlineLog.Info(string.Format("{0}:{1}:{2}[{2}{3}{2}]", _type.Name, _method.Name, Environment.NewLine, DataObjectHandler.SerializeObjToXmlString(obj)));
                     }
                 }
                 else
                 {
-                    creditcardLog.Info(string.Format("{0}.{1}:[]", _type.Name, _method.Name));
+                    airlineLog.Info(string.Format("{0}.{1}:[]", _type.Name, _method.Name));
                 }
             }
         }
         /* Info with exception */
         public static void Info(string msg, Type _type, MethodBase _method, Exception ex)
         {
-            creditcardLog.Info(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg), ex);
+            airlineLog.Info(string.Format("{0}:{1}:{2}", _type.Name, _method.Name, msg), ex);
         }
 
     }
