@@ -6,4 +6,9 @@
         public string destination { get; set; }
     }
 
+    public class SearchResponse
+    {
+        public int messagecode { get; set; }
+        public string messagedes { get; set; }
+    }
 }

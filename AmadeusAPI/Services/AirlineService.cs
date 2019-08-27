@@ -13,7 +13,7 @@ namespace AmadeusAPI.Services
     {
         List<string> GetAllPaths(SearchReq request);
 
-        List<string> GetShortestPath(SearchReq request);
+        Route GetShortestPath(SearchReq request);
 
     }
     public class AirlineService : IAirlineService
@@ -42,29 +42,27 @@ namespace AmadeusAPI.Services
                 graph.addEdge(7, 8);
                 graph.addEdge(8, 2);
                 graph.addEdge(8, 3);
-
-                // graph.printAllPaths(request.source,request.destination);
-                graph.printAllPaths(0, 6);
+                var source = graph.datacode.FirstOrDefault(x => x.Key == request.source).Value;
+                var destination = graph.datacode.FirstOrDefault(x => x.Key == request.destination).Value;
+                graph.printAllPaths(source, destination);
                 return graph.Result.ToList();
 
             }
             catch (Exception ex)
             {
-                AirlineLogManager.Error(null, CurrentClass, currentMethod, ex);
-                
+                AirlineLogManager.Error(null, CurrentClass, currentMethod, ex);                
             }
             return null;
-
         }
 
-        public List<string> GetShortestPath(SearchReq request)
+        public Route GetShortestPath(SearchReq request)
         {
             MethodBase currentMethod = MethodBase.GetCurrentMethod();
             try
             {
                 Dijkstra dijkstra = new Dijkstra();
                 dijkstra.ShortestPath(request.source, request.destination);
-                return dijkstra.Result.ToList();
+                return dijkstra.Result ;
             }
             catch (Exception ex)
             {

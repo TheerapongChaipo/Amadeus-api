@@ -9,13 +9,15 @@ namespace AmadeusAPI.Models
     {
         public string From { get; private set; }
         public string To { get; private set; }
-        public double Distance { get; private set; }
+        public double Cost { get; private set; }
 
-        public Route(string from, string to, double distance)
+        public string RoutePath { get;  set; }
+
+        public Route(string from, string to, double cost)
         {
             this.From = from;
             this.To = to;
-            this.Distance = distance;
+            this.Cost = cost;
         }
     }
 }
