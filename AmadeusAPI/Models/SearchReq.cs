@@ -1,4 +1,7 @@
-﻿namespace AmadeusAPI.Controllers
+﻿using AmadeusAPI.Models;
+using System.Collections.Generic;
+
+namespace AmadeusAPI.Controllers
 {
     public class SearchReq
     {
@@ -8,7 +11,14 @@
 
     public class SearchResponse
     {
-        public int messagecode { get; set; }
-        public string messagedes { get; set; }
+        public int Messagecode { get; set; }
+        public string MessageDes { get; set; }
+    }
+
+    public class ShortestResponse
+    {      
+        public string Routepath { get; set; }
+        public double Cost  { get; set; }
+        public List<Stations> Stations { get; set; }
     }
 }

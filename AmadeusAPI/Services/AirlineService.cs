@@ -11,16 +11,18 @@ namespace AmadeusAPI.Services
 {
     public interface IAirlineService
     {
-        List<string> GetAllPaths(SearchReq request);
+        List<ShortestResponse> GetAllPaths(SearchReq request);
 
-        Route GetShortestPath(SearchReq request);
+        ShortestResponse GetShortestPath(SearchReq request);
+
+        List<Route> GetAllRoutes();
 
     }
     public class AirlineService : IAirlineService
     {
         private static readonly Type CurrentClass = typeof(AirlineService);
      
-        public List<string> GetAllPaths(SearchReq request)
+        public List<ShortestResponse> GetAllPaths(SearchReq request)
         {
             MethodBase currentMethod = MethodBase.GetCurrentMethod();
             try
@@ -45,7 +47,7 @@ namespace AmadeusAPI.Services
                 var source = graph.datacode.FirstOrDefault(x => x.Key == request.source).Value;
                 var destination = graph.datacode.FirstOrDefault(x => x.Key == request.destination).Value;
                 graph.printAllPaths(source, destination);
-                return graph.Result.ToList();
+                return graph.ShortestResponses;
 
             }
             catch (Exception ex)
@@ -55,19 +57,40 @@ namespace AmadeusAPI.Services
             return null;
         }
 
-        public Route GetShortestPath(SearchReq request)
+        public ShortestResponse GetShortestPath(SearchReq request)
         {
             MethodBase currentMethod = MethodBase.GetCurrentMethod();
             try
             {
                 Dijkstra dijkstra = new Dijkstra();
                 dijkstra.ShortestPath(request.source, request.destination);
-                return dijkstra.Result ;
+                var response = new ShortestResponse();
+                response.Stations = new List<Stations>();
+                response.Stations = dijkstra.stations;
+                response.Routepath = dijkstra.routpath;
+                response.Cost = dijkstra.Cost;
+                return response;
             }
             catch (Exception ex)
             {
                 AirlineLogManager.Error(null, CurrentClass, currentMethod, ex);
 
+            }
+            return null;
+        }
+
+        public List<Route> GetAllRoutes()
+        {
+            MethodBase currentMethod = MethodBase.GetCurrentMethod();
+            try
+            {
+                Dijkstra dijkstra = new Dijkstra();
+                dijkstra.initGraph();
+                return dijkstra.routes;
+            }
+            catch (Exception ex)
+            {
+                AirlineLogManager.Error(null, CurrentClass, currentMethod, ex);
             }
             return null;
         }

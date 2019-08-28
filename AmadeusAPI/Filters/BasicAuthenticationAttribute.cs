@@ -27,17 +27,13 @@ namespace AmadeusAPI.Filters
                 var password = usernamePasswordArray[1];
 
                 // Replace this with your own system of security / means of validating credentials
-                var isValid = userName == "amd" && password == "p@ssw0rd";
+                var isValid = userName == "amdtest" && password == "p@ssw0rd";
 
                 if (isValid)
                 {
                     var principal = new GenericPrincipal(new GenericIdentity(userName), null);
                     Thread.CurrentPrincipal = principal;
-                    HttpContext.Current.User = principal;
-                    //actionContext.Response =
-                    //   actionContext.Request.CreateResponse(HttpStatusCode.OK,
-                    //      "User " + userName + " successfully authenticated");
-
+                    HttpContext.Current.User = principal;                   
                     return;
                 }
             }
@@ -48,8 +44,7 @@ namespace AmadeusAPI.Filters
         private static void HandleUnathorized(HttpActionContext actionContext)
         {
             actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, "Unauthorized");
-            actionContext.Response.Headers.Add("WWW-Authenticate", "Basic Scheme='Data' location = 'http://localhost:");
-            
+            actionContext.Response.Headers.Add("WWW-Authenticate", "Basic Scheme='Data' location = 'http://localhost:");            
         }
     }
 }

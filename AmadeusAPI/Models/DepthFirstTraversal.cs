@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using AmadeusAPI.Controllers;
+using System.Collections.Generic;
 
 namespace AmadeusAPI.Models
 {
     public class DepthFirstTraversal
     {
         private readonly List<string> _result = new List<string>();
+
+
+        public List<ShortestResponse> ShortestResponses = new List<ShortestResponse>();
+
         public IList<string> Result { get { return _result; } }
 
         private int vertices;
@@ -49,6 +54,7 @@ namespace AmadeusAPI.Models
             bool[] isVisited = new bool[vertices];
             List<int> pathList = new List<int>();
             pathList.Add(source);
+            
             GetAllPathsUtil(source, destination, isVisited, pathList);
         }
         private void GetAllPathsUtil(int u, int d, bool[] isVisited, List<int> localPathList)
@@ -57,11 +63,19 @@ namespace AmadeusAPI.Models
             if (u.Equals(d))
             {
                 var sybol = string.Empty;
-                var sentence = string.Empty;              
+                var sentence = string.Empty;
+                
+                var stations = new List<Stations>();
                 for (int i = 0; i < localPathList.Count; i++)
                 {
                     sentence += Data.GetCode(localPathList[i]) + (i < localPathList.Count - 1 ? "-" : "");
+
+                    var s = new Stations() { Name = Data.GetCode(localPathList[i]), Routepath = sentence, Sequence = i + 1 };
+                    stations.Add(s);
                 }
+                ShortestResponses.Add(new ShortestResponse() { Stations = stations , Routepath = sentence });
+
+
                 _result.Add(sentence);
                 isVisited[u] = false;
                 return;
@@ -77,8 +91,6 @@ namespace AmadeusAPI.Models
                 }
             }
             isVisited[u] = false;
-        }
-
-       
+        }       
     }
 }

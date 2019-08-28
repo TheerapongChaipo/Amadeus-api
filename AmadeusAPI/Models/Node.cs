@@ -19,6 +19,14 @@ namespace AmadeusAPI.Models
         }
 
     }
+
+    public class Stations {      
+        public int Sequence { get; set; }
+        public string Name { get; set; } 
+        public string Routepath { get; set; }   
+    }
+
+
     public class Data
     {
         public static string GetCode(int code)

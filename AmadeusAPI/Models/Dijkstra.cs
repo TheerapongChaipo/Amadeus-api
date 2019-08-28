@@ -10,7 +10,11 @@ namespace AmadeusAPI.Models
     public class Dijkstra
     {
         //private readonly Route _result = new Route>();
-        public Route Result { get; set; }
+       // public Route Result { get; set; }
+
+        public List<Stations> stations { get; set; }
+        public string routpath { get; set; }
+        public double Cost { get; set; }
 
         public Dictionary<string, Node> nodeDict = new Dictionary<string, Node>();
         public List<Route> routes { get; set; }
@@ -41,7 +45,7 @@ namespace AmadeusAPI.Models
             PrintShortestPath(startNode, destNode);
         }
 
-        private void initGraph()
+        public void initGraph()
         {
             //Load rount from File , must move to DB
             var apPath = HttpContext.Current.Server.MapPath(@"~/Models/graph2.txt");
@@ -114,15 +118,20 @@ namespace AmadeusAPI.Models
                 pathList.Add(currentNode.PreviousNode.Name);
                 currentNode = currentNode.PreviousNode;
             }
+
+            stations = new List<Stations>();         
+         
             pathList.Reverse();
-            var sentence = string.Empty;
+            var sentence = string.Empty;           
             for (int i = 0; i < pathList.Count; i++)
             {
                 sentence += pathList[i] + (i < pathList.Count - 1 ? "-" : "");
+                var s = new Stations() { Name = pathList[i], Routepath = sentence, Sequence = i + 1 };
+                stations.Add(s);
             }
-            Result = new Route(startNode, destNode, nodeDict[destNode].Value) { RoutePath = sentence };
-            //_result.Add(new Route("","", nodeDict[destNode].Value) { RoutePath = sentence });
-            //_result.Add(nodeDict[destNode].Value.ToString());
+            routpath = sentence;
+            Cost = nodeDict[destNode].Value;
+
         }
     }
 }
