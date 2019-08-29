@@ -8,10 +8,7 @@ using System.Web;
 namespace AmadeusAPI.Models
 {
     public class Dijkstra
-    {
-        //private readonly Route _result = new Route>();
-       // public Route Result { get; set; }
-
+    {     
         public List<Stations> stations { get; set; }
         public string routpath { get; set; }
         public double Cost { get; set; }
