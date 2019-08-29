@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmadeusAPI", "AmadeusAPI\AmadeusAPI.csproj", "{872C2AA1-7716-47A2-A8BC-E90EBD4872AD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmadeusAPI.Tests", "AmadeusAPI.Tests\AmadeusAPI.Tests.csproj", "{80884C56-B3F9-42FA-A7FD-9E1A478E6FE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{872C2AA1-7716-47A2-A8BC-E90EBD4872AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{872C2AA1-7716-47A2-A8BC-E90EBD4872AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{872C2AA1-7716-47A2-A8BC-E90EBD4872AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80884C56-B3F9-42FA-A7FD-9E1A478E6FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80884C56-B3F9-42FA-A7FD-9E1A478E6FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80884C56-B3F9-42FA-A7FD-9E1A478E6FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80884C56-B3F9-42FA-A7FD-9E1A478E6FE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

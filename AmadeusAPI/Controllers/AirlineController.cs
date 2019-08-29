@@ -23,17 +23,18 @@ namespace AmadeusAPI.Controllers
         [HttpPost]
         [Route("search/airline")]       
         public HttpResponseMessage SearchAirline(SearchReq request)
-        {
+        {            
             MethodBase currentMethod = MethodBase.GetCurrentMethod();
-            AirlineLogManager.Entering(string.Format("source: {0} to destination: {1}", request.source, request.destination), currentClass, currentMethod);
-
-            if (string.IsNullOrEmpty(request.source) || string.IsNullOrEmpty(request.source))
+          
+            if (request == null || string.IsNullOrEmpty(request.source) || string.IsNullOrEmpty(request.source))
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, new SearchResponse { Messagecode = (int)HttpStatusCode.BadRequest, MessageDes = "source or destination can not null or empty." });
             }
 
+            AirlineLogManager.Entering(string.Format("source: {0} to destination: {1}", request.source, request.destination), currentClass, currentMethod);
+
             Regex r = new Regex(@"^[A-I]{1}$");
-            if (!r.IsMatch(request.source) || !r.IsMatch(request.source))
+            if (!r.IsMatch(request.source) || !r.IsMatch(request.destination))
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, new SearchResponse { Messagecode = (int)HttpStatusCode.BadRequest, MessageDes = "source or destination not match" });
             }
@@ -51,12 +52,13 @@ namespace AmadeusAPI.Controllers
         public HttpResponseMessage ShortestPath(SearchReq request)
         {
             MethodBase currentMethod = MethodBase.GetCurrentMethod();
-            AirlineLogManager.Entering(string.Format("source: {0} to destination: {1}", request.source, request.destination), currentClass, currentMethod);
 
-            if (string.IsNullOrEmpty(request.source) || string.IsNullOrEmpty(request.source))
+            if (request == null || string.IsNullOrEmpty(request.source) || string.IsNullOrEmpty(request.source))
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, new SearchResponse { Messagecode = (int)HttpStatusCode.BadRequest, MessageDes = "source or destination can not null or empty." });
             }
+
+            AirlineLogManager.Entering(string.Format("source: {0} to destination: {1}", request.source, request.destination), currentClass, currentMethod);
 
             Regex r = new Regex(@"^[A-I]{1}$");
             if (!r.IsMatch(request.source) || !r.IsMatch(request.source)) {
