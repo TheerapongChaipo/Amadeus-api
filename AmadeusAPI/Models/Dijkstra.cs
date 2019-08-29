@@ -45,8 +45,9 @@ namespace AmadeusAPI.Models
 
         public void initGraph()
         {
-            //Load rount from File , must move to DB
-
+            //In this step must move to DB
+            #region
+            //Load rount from File ,
             //var apPath = HttpContext.Current.Server.MapPath(@"~/Models/graph2.txt");
             //if (!File.Exists(apPath))
             //{
@@ -72,7 +73,7 @@ namespace AmadeusAPI.Models
             //        }
             //    }
             //}
-         
+            #endregion
 
             nodeDict.Add("A", new Node("A"));
             nodeDict.Add("B", new Node("B"));
@@ -110,7 +111,6 @@ namespace AmadeusAPI.Models
             routes.Add(new Route("H", "I", 35));
             routes.Add(new Route("I", "C", 90));
             routes.Add(new Route("I", "D", 30));
-
         }
 
         private void CheckNode(PrioQueue queue, string destinationNode)
